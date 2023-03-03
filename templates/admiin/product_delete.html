@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Delete - {{product.title}}
+{% endblock title %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6 mt-5 ">
+            <h2>Are you sure to delete -  {{product.title}}</h2>
+            <form  method="post" enctype="multipart/form-data" >{% csrf_token %}
+                
+                <a class="btn btn-secondary" href="{% url 'aindex' %}"><button type="submit" class="btn btn-primary" >Submit</button></a>
+                <a class="btn btn-secondary" href="{% url 'aindex' %}"> Back Detail</a>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+  </div>
+{% endblock %}
