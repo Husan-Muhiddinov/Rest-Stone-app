@@ -33,8 +33,8 @@ def AddProductView(request):
 
 
 def OrderView(request,user_id):
-    order=Cart.objects.filter(is_superuser=request.user)
     orders=get_object_or_404(CheckOut,id=user_id)
+    order=Cart.objects.filter(sav=orders)
     sum = 0
     for p in order:
         sum += p.count
@@ -55,7 +55,7 @@ def AdminIndexView(request):
     orders=CheckOut.objects.all()
     context={
         'products':products,
-        'orders':orders
+        'orders':orders,
     }
     return render(request, 'admiin/index.html',context=context)
 

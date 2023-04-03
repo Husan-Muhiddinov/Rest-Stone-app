@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from django.contrib import messages
 from main.models import Product
+from django.views import View
 from .models import Cart,CheckOut
 import random
 # Create your views here.
@@ -40,12 +41,15 @@ def ArticleDetailView(request, product_id):
 
 
 def BasketView(request):
-    product = Cart.objects.filter(user=request.user)
+    product = Cart.objects.filter(user=request.user).filter(status=False)
     result=product.count
     sum = 0
-    for p in product:
-        t = p.product.price * p.count
-        sum += t
+    if product:
+        for p in product:
+            t = p.product.price * p.count
+            sum += t
+    else:
+        t = 0
     context = {
         'product': product,
         'result':result,
@@ -103,7 +107,7 @@ def CheckOutView(request):
     if request.method == 'POST':
         cart = CheckOut(
             user=request.user,
-            ref=new_REF,
+            ref=new_REF,    
             name=request.POST['name'],
             first_name=request.POST['first_name'],
             address=request.POST['address'],
@@ -117,6 +121,10 @@ def CheckOutView(request):
             cost=sum,
         )
         cart.save()
+        for p in product:
+            p.sav = cart
+            p.status = True
+            p.save()
 
         return redirect('index')
     context = {
@@ -128,6 +136,12 @@ def CheckOutView(request):
 
 
 
+def recently(request):
+    product = Cart.objects.filter(user=request.user).filter(status=True)
+    context = {
+        'product': product,
+    }
+    return render(request, 'orders.html', context=context)
 
 
     

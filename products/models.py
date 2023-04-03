@@ -21,7 +21,7 @@ class CheckOut(models.Model):
     region=models.CharField(max_length=50)
     country=models.CharField(max_length=25)
     status = models.CharField(max_length=100, null=True, blank=True)
-    cost = models.CharField(max_length=100, blank=True, null=True)
+    cost = models.IntegerField(blank=True, null=True)
 
     
     def __str__(self):
@@ -32,6 +32,7 @@ class Cart(models.Model):
     count=models.IntegerField(default=0)
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     sav=models.ForeignKey(CheckOut,on_delete=models.CASCADE,null=True)
+    status=models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.product)

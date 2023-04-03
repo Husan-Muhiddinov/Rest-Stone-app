@@ -31,7 +31,7 @@
 						</tr>
 					</thead>
 					<tbody>
-                        {% for item in order %}
+                        {% for item in order %} 
 						<tr>
 							<td>{{ item.id }}</td>
 							<td>{{ item.product.name }}</td>
@@ -51,7 +51,7 @@
 					<tfoot>
 						<tr>
 							<th colspan="4" class="text-right">Jami narx</th>
-							<th>&dollar;{{ orders.cost }}</th>
+							<th>&dollar;{{ orders.cost|add:10 }}</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -76,7 +76,7 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="shipping">
 					<h4 class="bold">Yetkazib Berish Malumotlari</h4>
-					<p><i class="glyphicon glyphicon-user"></i> NOMI: {{orders.name}}<strong></strong></p>
+					<p><i class="glyphicon glyphicon-user"></i> ISMI: {{orders.name}}-{{orders.first_name}}<strong></strong></p>
 					<p><i class="glyphicon glyphicon-map-marker"></i> MANZILI:
 						<strong>{{orders.address}}</strong>
 					</p>
@@ -96,7 +96,7 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="details">
 					<h4 class="bold">Shaxsiy Ta'minlangan Malumotlar</h4>
-					<p><i class="glyphicon glyphicon-user"></i><strong> NOMI: {{orders.name}}</strong></p>
+					<p><i class="glyphicon glyphicon-user"></i><strong> ISMI: {{orders.name}}-{{orders.first_name}}</strong></p>
 					<p><i class="glyphicon glyphicon-phone-alt"></i> TELEFON RAQAMI: <strong>{{orders.number}}</strong></p>
 					<p>
 						<i class="glyphicon glyphicon-envelope"></i> EMAIL: 

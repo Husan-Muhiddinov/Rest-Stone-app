@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body%}
+
+        <div class="container" id="page">
+			<div class="row">
+				<div class="col-lg-8">
+					<h3 class="bold">
+						<i class="glyphicon glyphicon-shopping-cart"></i> Sizning Mahsulot Savatingiz
+					</h3>
+
+					<div class="panel panel-primary">
+						<div class="panel-body">
+
+
+							{% for i in product %}
+							<div class="row">
+								<div class="col-lg-4">
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<div class="thumbnail thumbnail-q">
+											<img src="{{i.product.image.url}}" alt="">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<h3 class="bold">{{i.product.name}}</h3>
+									<p>&dollar;{{i.product.price}}</p>
+									<br />
+									<p>
+										<button type="button" class="btn btn-danger btn-xs">
+											<a href="{% url 'delete' product_id=i.id %}">
+											<i class="glyphicon glyphicon-trash"></i>
+											</a>
+										</button>
+									</p>
+								</div> 
+								<div class="col-lg-2">
+									<h3>Soni</h3>
+									<p>
+										{{i.count}}
+									</p>
+								</div>
+								<div class="col-lg-2">
+									<h3>Jami</h3>
+									<p>
+										<strong>&dollar;{% widthratio i.product.price 1 i.count %}</strong>
+									</p>
+								</div>
+								
+							</div>
+							{% endfor %}
+
+							
+						</div>
+					</div>
+				</div>
+{% endblock %}
